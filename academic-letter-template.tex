@@ -1,0 +1,276 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Academic Letter LaTeX and RMarkdown Structure                       %
+% Author: Pedro Henrique Pereira Braga                                %
+%                                                                     %
+% License:                                                            %
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/) %
+%                                                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Set the font size (11pt, for now) and paper size (e.g. letterpaper, a4paper)
+\documentclass[11pt, letterpaper]{letter} 
+
+%----------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------
+
+\usepackage{graphicx} % Required for including pictures
+\usepackage{fancyhdr} % Allows the use of fancy headers and footers
+
+\usepackage{microtype} % For typography improvement
+
+\usepackage{url} % Allows the use of hyperlinks
+\urlstyle{same} % Allows hyperlink fonts to be the same as the mainfont
+\usepackage[hidelinks]{hyperref} % Allows the use of hyperlinks and 
+% removes the blue boxes around the link
+
+\pagestyle{empty} % Removes headers and footers
+
+\usepackage{setspace} % Allows the use of double spacing in the letter body
+
+\setlength\parindent{1cm} % Paragraph indentation
+
+% Create a new command for the horizontal rule in the document which allows 
+% thickness specification
+\makeatletter
+  \def\@texttop{} % force the address to start above
+\renewcommand*{\opening}[1]{\ifx\@empty\fromaddress
+  \thispagestyle{firstpage}%
+    {\raggedleft\@date\par}%
+  \else  % home address
+    \thispagestyle{empty}%
+    {\raggedleft\begin{tabular}{l@{}}\ignorespaces
+      \fromaddress \\*[2\parskip]%
+      \@date \end{tabular}\par}%
+  \fi
+  %\vspace{2\parskip}%                        <-- Removed
+  %{\raggedright \toname \\ \toaddress \par}% <-- Removed
+  %\vspace{2\parskip}%                        <-- Removed
+  #1\par\nobreak}
+\let\ps@empty\ps@plain
+\let\ps@firstpage\ps@plain
+\makeatother
+
+%--------------------------------------------------------------------------
+%	FONTS
+%--------------------------------------------------------------------------
+
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[quiet]{fontspec} % Allows the use of fontspec
+\usepackage{txfonts} % Allows the use of Lato fonts
+
+% Selecting Google's Lato font-family, as it is free to use
+
+% Bold and italic were not working, so I defined them for the main font
+% manually as follows:
+
+\defaultfontfeatures{Mapping=tex-text}
+\setmainfont[Mapping=tex-text, Color=textcolor,
+BoldFont=Lato-Bold.ttf,
+ItalicFont=Lato-LightItalic.ttf,
+BoldItalicFont=Lato-BoldItalic.ttf
+]
+{Lato-Regular.ttf}
+
+\newfontfamily\bodyfont
+[BoldFont=Lato-Bold.ttf,
+ItalicFont=Lato-LightItalic.ttf,
+BoldItalicFont=Lato-BoldItalic.ttf]
+{Lato-Regular.ttf}
+
+\newfontfamily\thinfont[]{Lato-Light.ttf}
+
+%----------------------------------------------------------------------------
+%	DOCUMENT MARGINS
+%----------------------------------------------------------------------------
+
+\usepackage{geometry} % Required for adjusting page dimensions
+
+\geometry{
+    headheight = 0.8in, % Header height
+	top=1.5in, % Top margin
+	bottom=1.5cm, % Bottom margin
+	left=3cm, % Left margin
+	right=3cm, % Right margin
+	% showframe, % Uncomment to show how the type block is set on the page
+}
+
+%-----------------------------------------------------------------------------
+%	AUTHOR AND RECIPIENTS NEW COMMANDS AND DETAILS STRUCTURE
+%-----------------------------------------------------------------------------
+
+\newcommand{\authordetails}[1]{\renewcommand{\authordetails}{#1}}
+\newcommand{\recipientdetails}[1]{\renewcommand{\recipientdetails}{#1}}
+
+%-----------------------------------------------------------------------------
+%	HEADER STRUCTURE
+%-----------------------------------------------------------------------------
+
+\address{
+ % Include the author's details on the right side of the page under the line
+	\raggedleft{
+		\footnotesize{ % Use a smaller font size
+		$author$\\ % Author name
+		\authordetails\\
+       \hspace{1mm}
+       }
+	}
+	\vspace{-0.05\textheight} % Move the date and letter content up
+}
+
+%------------------------------------------------------------------------------
+%	COMPOSE THE ENTIRE HEADER
+%------------------------------------------------------------------------------
+
+\renewcommand{\opening}[1]{
+	{\fromaddress
+    \vspace{0.05\textheight}\\ % Print the sender's address here and add some whitespace to allow the printing of the date
+    \raggedleft{$date$} % Include the date, aligned to the right
+    \par % par
+    }
+	{\raggedright 
+    \toname\\ 
+    \toaddress 
+    \par} % Print the recipient's name and adress
+	\vspace{0.25cm} % White vertical space after recipient's address
+	\noindent #1 % Following this, insert the opening info
+}
+
+%------------------------------------------------------------------------------
+%	SIGNATURE STRUCTURE
+%------------------------------------------------------------------------------
+% The signature is a combination of the author's name, title and institution
+\signature{$author$, $from_professional_title$\\
+           $from_institution$} 
+
+% I will later combine the option of inserting a signature within it
+           
+\renewcommand{\closing}[1]{
+	\vspace{2.5mm} % Some whitespace after the letter content and before the signature
+	\noindent % Stop paragraph indentation
+	\hspace*{\longindentation} % Move the signature right to the value of \longindentation
+	\parbox{\indentedwidth}{
+		\raggedright
+		#1 % Print the signature text
+		\vskip 1.65cm % Whitespace between the closing text and author's name for a physical signature
+		\fromsig % Prints the value of \signature{}, i.e. author name and title
+	}
+}
+
+%-------------------------------------------------------------------------------
+%	AUTHOR'S INFORMATION
+%-------------------------------------------------------------------------------
+
+\authordetails{
+    $from_position$\\
+	\thinfont{$from_department$\\ % Sender's department/institution
+    $from_institution$\\
+    $from_address$\\ % Sender's address
+	$from_city$, $from_state_province$\\ % Sender's city, state or province,
+    $from_postalcode$\\ % postal code
+    $from_country$}
+}
+
+%------------------------------------------------------------------------------
+%	RECIPIENT'S INFORMATION
+%------------------------------------------------------------------------------
+
+\recipientdetails{
+$to_professional_title$ $to_name$\\
+    \thinfont{
+    $if(to_department)$
+$to_department$\\
+$endif$
+    $if(to_institution)$
+$to_institution$\\
+$endif$
+    $if(to_address)$
+$to_address$\\
+$endif$
+    $to_city$, $to_state_province$\\    
+    $if(to_postal_code)$
+$to_postal_code$\\
+$endif$
+    $if(to_country)$
+$to_country$
+$endif$}
+    $if(subject)$
+    \\~\\
+\bodyfont{Subject: $subject$}
+$endif$
+}
+
+%------------------------------------------------------------------------------
+%	HEADER CONTENTS
+%------------------------------------------------------------------------------
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+        \fancyhead[L]{
+            \includegraphics[height=0.6in, keepaspectratio=true]{$from_institution_logo$}
+            }
+        \fancyhead[R]{$author$\\
+            \footnotesize{
+              $from_email$\\ % Sender's email address
+              $from_personal_website$ \\ % Sender's URL
+              $from_phone$ % Sender's phone number
+              }
+            }
+        }
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+        \fancyhead[L]{
+            \includegraphics[height=0.6in, keepaspectratio=true]{$from_institution_logo$}
+            }
+        \fancyhead[R]{$author$\\
+            \footnotesize{
+              $from_email$\\ % Sender's email address
+              $from_personal_website$ \\ % Sender's URL
+              $from_phone$ % Sender's phone number
+              }
+            }
+        }
+
+\fancypagestyle{empty}{
+    \fancyhf{}
+        \fancyhead[L]{
+            \includegraphics[height=0.6in, keepaspectratio=true]{$from_institution_logo$}
+            }
+        \fancyhead[R]{$author$\\
+            \footnotesize{
+              $from_email$\\ % Sender's email address
+              $from_personal_website$ \\ % Sender's URL
+              $from_phone$ % Sender's phone number
+              }
+            }
+        }
+
+%------------------------------------------------------------------------------
+\pagestyle{plain}
+
+\begin{document}
+
+%------------------------------------------------------------------------------
+%	TO ADDRESS
+%------------------------------------------------------------------------------
+
+\begin{letter}{\recipientdetails}
+
+%------------------------------------------------------------------------------
+%	LETTER CONTENT
+%------------------------------------------------------------------------------
+
+\opening{$opening_greeting$}
+\begin{doublespacing}
+
+$body$
+
+\end{doublespacing}
+\closing{$closing_greeting$}
+
+%------------------------------------------------------------------------------
+
+\end{letter}
+\end{document}
