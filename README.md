@@ -46,7 +46,8 @@ closing_greeting: "Sincerely,"
 
 The arguments `to_department`, `to_institution`, `to_address`, `to_postal_code` and `subject` are optional, and may be removed from the `YAML` at your discretion.
 
-You also have the option of using a logo. Be sure to change the argument  `from_institution_logo`. *Be aware of your institution's policy on the use of logo and related insignia. This is [Concordia University's Policy on the Use of the University's Logo](http://www.concordia.ca/content/dam/common/docs/policies/official-policies/SG-4.pdf?utm_source=redirect&utm_medium=pdf&utm_campaign=SG-4.pdf)* 
+You also have the option of using a logo. Be sure to change the argument  `from_institution_logo`.
+> *Be aware of your institution's policy on the use of logo and related insignia. This is [Concordia University's Policy on the Use of the University's Logo](http://www.concordia.ca/content/dam/common/docs/policies/official-policies/SG-4.pdf?utm_source=redirect&utm_medium=pdf&utm_campaign=SG-4.pdf)* 
 
 ## Contributing
 
