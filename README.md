@@ -57,4 +57,4 @@ If you see any issues or would like to suggest new features and modifications to
 
 Best regards,
 
-Pedro H. P. Braga
+[Pedro Henrique P. Braga](pedrohbraga.github.io)
