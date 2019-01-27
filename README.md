@@ -1,4 +1,4 @@
-# A template that helps creating academic cover letter
+# A template that helps creating an academic cover letter
 
 ## What is required to make it work?
 
