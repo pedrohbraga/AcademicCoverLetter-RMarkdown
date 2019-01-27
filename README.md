@@ -6,6 +6,8 @@ You  have to be sure that you have **RStudio** and a **TeX editor** (such as MiK
 
 ## Usage
 
+**[See an example for the use of this template here.](https://github.com/pedrohbraga/AcademicCoverLetter-RMarkdown/raw/master/AcademicCoverLetter.pdf)**
+
 You will need to have both the `.Rmd` and `.tex` files within the same directory. You can easily do this by cloning or downloading this repository.
 
 The `.tex` file contains the structure or template for this cover letter. If you are satisfied with the structure of the letter, you will not need to edit this file.
